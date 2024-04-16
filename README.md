@@ -68,3 +68,39 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Deployment
+
+### Docker Container
+
+To deploy your React application using Docker, follow these steps:
+
+1. Make sure Docker is installed on your machine.
+2. Navigate to the root directory of your project.
+3. Create a Dockerfile if you haven't already. Here's a basic example of a Dockerfile for a React application:
+
+```Dockerfile
+# Use the official Node.js image as a base
+FROM node:alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the package.json and package-lock.json files to the container
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the remaining project files to the container
+COPY . .
+
+# Build the React app
+RUN npm run build
+
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Command to run the React app
+CMD ["npm", "start"]
